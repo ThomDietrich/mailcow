@@ -492,6 +492,8 @@ DatabaseMirror clamav.inode.at" >> /etc/clamav/freshclam.conf
 			sed -i "/date_default_timezone_set/c\date_default_timezone_set('${sys_timezone}');" /var/www/dav/server.php
 			touch /var/mailcow/mailbox_backup_env
 			echo none > /var/mailcow/log/pflogsumm.log
+			sed -i "s/MAILCOW_HOST.MAILCOW_DOMAIN/${sys_hostname}.${sys_domain}/g" /var/www/mail/autoconfig/mail/config-v1.1.xml
+			sed -i "s/MAILCOW_DOMAIN/${sys_domain}/g" /var/www/mail/autoconfig/mail/config-v1.1.xml
 			sed -i "s/my_dbhost/${my_dbhost}/g" /var/www/mail/inc/vars.inc.php /var/www/dav/server.php
 			sed -i "s/my_mailcowpass/${my_mailcowpass}/g" /var/www/mail/inc/vars.inc.php /var/www/dav/server.php
 			sed -i "s/my_mailcowuser/${my_mailcowuser}/g" /var/www/mail/inc/vars.inc.php /var/www/dav/server.php
@@ -613,6 +615,7 @@ $(textb "mailcow MySQL")          ${my_mailcowuser}:${my_mailcowpass}@${my_dbhos
 $(textb "Roundcube MySQL")        ${my_rcuser}:${my_rcpass}@${my_dbhost}/${my_rcdb}
 $(textb "Web server")             ${httpd_platform^}
 $(textb "Web root")               https://${sys_hostname}.${sys_domain}
+$(textb "Autoconfig (Mozilla)")   https://autoconfig.${sys_domain}
 $(textb "DAV web root")           https://${httpd_dav_subdomain}.${sys_domain}
 
 --------------------------------------------------------

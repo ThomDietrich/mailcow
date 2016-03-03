@@ -17,6 +17,13 @@ server {
 	}
 }
 server {
+	listen 80;
+	listen [::]:80;
+	server_name autoconfig.MAILCOW_DOMAIN;
+	server_tokens off;
+	root /var/www/mail/autoconfig;
+}
+server {
 	listen 443;
 	listen [::]:443;
 	ssl on;
